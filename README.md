@@ -98,7 +98,7 @@ If we take out email regex we can see the anchors at the beginning and end of th
 
 ### Bracket Expressions
 
-A bracket expression is a subexpression of the regex string and can match the expression or not match the expression. In the email regex it is used to match a specific set of mulyiple characters such as any letter from a to z or any number from 0-9. The characters inside of the brackets ([]) represent the scope of characters which we want to match. The content of the so called "Bracket Expression" describe the characters we want to include in our text in order to match the regex. 
+A bracket expression is a subexpression of the regex string and can match the expression or not match the expression. In the email regex it is used to match a specific set of mulyiple characters such as any letter from a to z or any number from 0-9. The characters inside of the brackets (`[]`) represent the scope of characters which we want to match. The content of the so called "Bracket Expression" describe the characters we want to include in our text in order to match the regex. 
 It is very common to use a hyphen (-) between letters or numbers to describe the range of characters which we are looking for. It is sort of a shortcut of writing the exprssion. E.g. [abcde] is the same as [a-e] or [12345] is the same as [1-5].
 
 In our specific case of the "Match an email" Regex we have multiple bracket expression: 
@@ -108,6 +108,15 @@ As this bracket expression follows the ^ anchor, it measn that the beginning of 
 In our example we use a quantifier after the bracket expression. To learn about quantifiers read below.
 2. [\da-z\.-]
 3. [a-z\.]
+
+
+
+
+
+
+
+Character Classes are used to tell the regex engine to match only one out of several characters and are indicated by characters wrapper in square brakets such as: [a-z0-9_\.-]. Usually a character class macthes only a sinle character and the order in the text is not relevant. 
+To specify a range of characters we can use the hyphen ("-") [a-z]. As for example in the email regex we are looking for more than just one letter or number before the at sign, we can use a ?, * or + to repeat the character class in order to be able to validate the part in an email before the @ such as "test.user12". As we use the + sign after the character class we tell the regex engine that it is repeating the character class more than once.
 
 
 ### Quantifiers
@@ -143,19 +152,34 @@ In the "Match an email" regex example we use two greedy qunatifier: The `+` and 
 
 ### Grouping Constructs
 
-To describe a grouping of characters in a regex they are placed within parentheses `()` and is used to restrict alternations. We use the parentheses to enclose a pattern as it allows us to get a part of the match as a seperate item/subexpression. This is a very powerful tool because we can refer to the groups whenever we like as the regex engine captures them as a single unit. When a regex gets more complicated, by grouping parts of the regex in subexpressions we are able to check if different sections match different requirements.
+To describe a grouping of characters in a regex they are placed within parentheses `()` and is used to restrict alternations. We use the parentheses to enclose a pattern as it allows us to get a part of the match as a seperate item/subexpression. This is a very powerful tool because we can refer to the groups whenever we like as the regex engine captures them as a single unit. When a regex gets more complicated, by grouping parts of the regex in subexpressions we are able to check if different sections match different requirementsand it is easier to apply validations to each section of the string.
 
-In our example the grouping of the characters allows us to apply seperate string rules to each such as the qunatifiers. The email regex contains three groupings which are `([a-z0-9_\.-]+)`,seperated by a `a`- character, `([\da-z\.-]+)`, seperated by a dot `.` and `([a-z\.]{2,6})`. By wrapping the bracket expressions in group constructs we can validate whether the subexpression matches the username, email domain name or the end of the email address. 
+In our example the grouping of the characters allows us to apply seperate string rules to each such as the qunatifiers. The email regex contains three grouping constructs:
 
+ * `([a-z0-9_\.-]+)` This subexpression will determine whether the username matches the pattern or not. 
+ * `([\da-z\.-]+)` This subexpression will validate if the email domain name matches the pattern
+ * `([a-z\.]{2,6})` This construct will validate the remaining domain name such as `.com`, `.net` or `.co`
+ 
 
-
-
-
-`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`
 ### Character Classes
 
-Character Classes are used to tell the regex engine to match only one out of several characters and are indicated by characters wrapper in square brakets such as: [a-z0-9_\.-]. Usually a character class macthes only a sinle character and the order in the text is not relevant. 
-To specify a range of characters we can use the hyphen ("-") [a-z]. As for example in the email regex we are looking for more than just one letter or number before the at sign, we can use a ?, * or + to repeat the character class in order to be able to validate the part in an email before the @ such as "test.user12". As we use the + sign after the character class we tell the regex engine that it is repeating the character class more than once.
+Character classes are special notations which match any symbol from certain set. We already know the bracket expressions whicg are considred character classes but there are also some other common character classeswhich can be indicated by a backslash `\` character.. Certain letters can be escaped by representing common character classes, such as words, whitespaces or digits.Some examples of character classes are:
+ 
+ * `.` - Matches any character excet a newline character
+ * `\d` - this is a digit character class and matches any single digit(arabic) and is equivalent to the bracket expression `[0-9]`
+ * `\s` - match a whitespace symbol such a space, a tab (\t), a newline (\n), etc.
+ * `\w` - w stands for word character. It matches the ASCII character [A-Za-z0-9_] and matches any alphanumeric from th elatin alphabet plus an underscore `(_)`
+
+For example: The expression `/\w\d/g` (g looks for all characters, not only the first one) matches any word followed by a digit such as `test12`
+
+** Note: `\d`, `\w` and `\s` can be changed to perform a negative match by capitalizing the letter character. For example, \D matches a non-digit character.
+
+In the "Match an email" Regex there are multiple character classes to ensure that the subexpressions match a larger set of characters: 
+
+    1. `[a-z]` Matches any lower case alphabetic character between a and z
+    2. `[0-9]` Matches any number between 0 and 9
+    3. `\d` Matches any digit character
+    4. `.` Matches any chracter except a newline character
 
 ### The OR Operator
 
