@@ -42,6 +42,11 @@ As **Regex** is a literal, so we can wrap the expression in forward slash (`/`) 
 
 **Note**: In JavaScript there are two ways of describing a Regex: The literal notation and the use of a constructor notation where the constructors functions parameters are wrapped in quotation marks instead of forward slashes.
 
+```
+let re = /\w+/     //literal notation
+let re = new RegExp('\\w+')     //constructor with string pattern
+```
+
 ![graph-regex](./assets/graph.png)
 
 ### Metacharacters and literalcharacters
@@ -165,6 +170,21 @@ In the "Match an email" Regex there are multiple character classes to ensure tha
 The **OR operator** allows us to create a logical "or" operation. As we learned before, a bracket expression does not require a string to match all characters included in the pattern. Taking the example of `[a-z0-9]`, the text can include alphabetic **and** numeric characters but it is not mandatory. The text could also contain only alphabetic or numeric characters. To achieve a similar logic outside of the bracket expression, for example in a grouping construct, we could use the pipe character (`|`). The pipe character is used to match characters or expressions of either the left or the right of the | operator. For example `(t|T)` will either match `t` or `T`, it can't match both, and is equivalent to `[tT]`.
 
 ### Flags
+
+Flags in regular expressions are located after the closing forward slash (e.g. `/....../g`) and define extra functionality or limits for the regex. There are 6 different flags in JavaScript:
+
+i
+With this flag the search is case-insensitive: no difference between A and a (see the example below).
+g
+With this flag the search looks for all matches, without it – only the first match is returned.
+m
+Multiline mode (covered in the chapter Multiline mode of anchors ^ $, flag "m").
+s
+Enables “dotall” mode, that allows a dot . to match newline character \n (covered in the chapter Character classes).
+u
+Enables full Unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter Unicode: flag "u" and class \p{...}.
+y
+“Sticky” mode: searching at the exact position in the text (covered in the chapter Sticky flag "y", searching at position)
 
 ### Character Escapes
 
