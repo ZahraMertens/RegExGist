@@ -15,31 +15,17 @@ A possible Regular Expression to describe whether a text or input matches the em
 /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
 ```
 
-This specifc sequence of characters is used to validate if the email fulfills the email format requirements. Here is how the string breaks down: 
+This specifc sequence of characters is used to validate if an email corresponds with the classic email format. Here is a breakdown of the Regex components which are explained in detail below:
 
-* The string can contain any lower case letters
-* Can contain and number from 0 to 9
-* Can contain a . a -
-* Must contain a @
-* Followed by 
-* Followed by a .
-* followed by any lower case letters with the max amount of 6 and the min of 2
+* `/..../` Indicates a regular expression
+* `^` and `$` are anchors and initiate the beginning and end of the Regex
+* `a-z` Represents any alphabetic character from a to z
+* `0-9` Represents any numeric character from 0 to 9
+* `_` Matches the literal character "_"
+* `-` Matches the literal character "-"
+* `@` Matches the special character "@"
+* `.` Outside of brackets it matches the literal character ".", inside it can be ay character 
 
-each character of the regex string is a literl charactr
-meta characters allow us to create a generic regex string 
-. any character 	A period (special character: needs to be escaped by a \) \. (escapes the dot) excaoe character
-* zero or more
-".*" matches everyting
-
-Shorthand characters \d Since certain character classes are used often, a series of shorthand character classes are available. \d is short for [0-9]. In most flavors that support Unicode, \d includes all digits from all scripts. Notable exceptions are Java, JavaScript, and PCRE. These Unicode flavors match only ASCII digits with \d.
-
-. ca be anything in a regex
-
-
-
-
-
-Briefly summarize the regex you will be describing and what you will explain. Include a code snippet of the regex. Replace this text with your summary.
 
 ## Table of Contents
 
@@ -54,7 +40,10 @@ Briefly summarize the regex you will be describing and what you will explain. In
 
 ## Regex Components
 
-As Regex is a literal, to match the regex structure requirements the string characters/ meta characters must be wrapped in forward slashes ' "/" characters "/" '.
+As **Regex** is a literal, so we can wrap the expression in forward slash (`/`) characters: `/`^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$`/`
+
+**Note**: 
+
 
 ![graph-regex](./assets/graph.png)
 
@@ -174,7 +163,7 @@ Character classes are special notations which match any symbol from certain set.
 
 For example: The expression `/\w\d/g` (g looks for all characters, not only the first one) matches any word followed by a digit such as `test12`
 
-** Note: `\d`, `\w` and `\s` can be changed to perform a negative match by capitalizing the letter character. For example, \D matches a non-digit character.
+**Note**: `\d`, `\w` and `\s` can be changed to perform a negative match by capitalizing the letter character. For example, \D matches a non-digit character.
 
 In the "Match an email" Regex there are multiple character classes to ensure that the subexpressions match a larger set of characters: 
 
