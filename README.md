@@ -90,7 +90,7 @@ To understand the patterns described above, the next section will explain the xa
 The caret (^) is used to signify a string with the characters that follow it. As we use a bracket a bracket expression right after the caret, there i a range of possible matches.
 The $ anchor in the email i also perceded by a bracket expression which means there is a variety of options the string could end with.
 
-`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`
+<span style="color: red;">`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`</span>
 
 If we take out email regex we can see the anchors at the beginning and end of the regex. This defines that the beginning of the regex can start with any lower case letter, any number from 0 to 9 or the special characters. If the would start the email with ?test@user.com it would not match the regex and thorw an error.
 
