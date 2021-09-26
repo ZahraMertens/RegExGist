@@ -90,7 +90,7 @@ To understand the patterns described above, the next section will explain the xa
 The caret (^) is used to signify a string with the characters that follow it. As we use a bracket a bracket expression right after the caret, there i a range of possible matches.
 The $ anchor in the email i also perceded by a bracket expression which means there is a variety of options the string could end with.
 
-<span data-color="red;">`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`</span>
+`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`
 
 If we take out email regex we can see the anchors at the beginning and end of the regex. This defines that the beginning of the regex can start with any lower case letter, any number from 0 to 9 or the special characters. If the would start the email with ?test@user.com it would not match the regex and thorw an error.
 
@@ -110,16 +110,36 @@ In our example we use a quantifier after the bracket expression. To learn about 
 
 ### Quantifiers
 
-In a regex there are multiple options of quantifiers and specify how many instances of a charcter, group or charcter class must be present in the text for the match to be found. Following are the most common ones:
+As we now know how to define the content of a string we should also take a look on how to define the amount/length of characters the text must contain.
+To determine the length of the whole text or of a specific section (e.g. Bracket Expressions) we can use "Quantifiers" which set the limit of minimum and/or maximum amount of characters.
 
-* "*" This quantifier describes that the character must be present zero or more times and is considered a greedy quntifier. This expression is equivalent to {0,}
-* "+" This greedy qunatifier describes that the instance
-? match zero or one time
-{n, m} match from n to m: this is integer consistant as a greedy quantifier such as * or + can match endless characters, this expression specifies  
+Most common quantifiers:
+
+* `*` The quantifier matches the perceding element zero or more times. This is equivalent to `{0,}`
+* `+` Match one or more time. This is equivalent to `{1,}`
+* `?` Match zero or one time. This is equivalent to `{0, 1}`
+* `{n}` Match n times
+* `{n,}` Match n or more times
+* `{n, m}` Match from n to m times
+
+In a regex we can differe between "greedy" and "lazy" qunatifiers:
+
+ * Greedy Quantifier: All the above named quantifiers are greedy quantifiers and it is possible to have a "lazy" version of those. A greedy quantifier tries to match an element as many times as possible. So when using a greedy qunatifier the regex engine goes through every character of the string and adds as many as it can to the match. If a part of the pattern does not fit it goes backwards by one character until it matches the pattern we are looking for. To summarize the greedy mod tries to match as much as they can only giving back as much as nece
+
+ * Lazy Quantifier: In order to turn a greedy quantifier into a lazy one  we can simply add a `?` to our expression (e.g. +?). This is the opposite to the greedy mode as it tries to repeat the steps a minimal nuber of times. So the main difference is that instead of going backwards by one character the engine repeats the steps as less as possible until it finds the right pattern.
+
+To summarize the greedy qunatifier tries to match as much as they can only giving back as much as necessary to match the remainder of the regex while the lazy qunatifiers tries to minimal match first and increases if necessesary.
 
 
+`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`
 
+In the "Match an email" regex example we use two greedy qunatifier: The `+` and `{2,6}`.
 
+* [a-z0-9_\.-]`+` This expression means that the content in the bracket expression must be present one or more time in order to match the email format.
+
+* [\da-z\.-]`+` This expression also means that the perceding item must match one ore more time.
+
+* [a-z\.]`{2,6}` This expression means that we want to find the perceding item a minimum of two times and a maximum of six times. (E.g. `.com` matches while `.comcom` does not match because the amount of characters = 7 )
 
 ### Grouping Constructs
 
