@@ -43,7 +43,7 @@ As **Regex** is a literal, so we can wrap the expression in forward slash (`/`) 
 **Note**: In JavaScript there are two ways of describing a Regex: The literal notation and the use of a constructor notation where the constructors functions parameters are wrapped in quotation marks instead of forward slashes.
 
 ```
-let re = /\w+/     //literal notation
+let re = /\w+/                  //literal notation
 let re = new RegExp('\\w+')     //constructor with string pattern
 ```
 
@@ -198,4 +198,6 @@ All the following characters have special meaning within a regular expression:
 
 ## Author
 
-A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
+Author: Zahra Mertens
+
+The author is currently studying web development at the University of Sydney. Check out the [portfolio](https://zahramertens.github.io/SupMaPortfolio/) or [github profile](https://github.com/ZahraMertens) for further information.
