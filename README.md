@@ -54,6 +54,8 @@ Briefly summarize the regex you will be describing and what you will explain. In
 
 As Regex is a literal, to match the regex structure requirements the string characters/ meta characters must be wrapped in forward slashes ' "/" characters "/" '.
 
+![graph-regex](./assets/graph.png)
+
 ### Metacharacter
 
 ### The Dot
@@ -131,24 +133,25 @@ In a regex we can differe between "greedy" and "lazy" qunatifiers:
 To summarize the greedy qunatifier tries to match as much as they can only giving back as much as necessary to match the remainder of the regex while the lazy qunatifiers tries to minimal match first and increases if necessesary.
 
 
-`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`
-
 In the "Match an email" regex example we use two greedy qunatifier: The `+` and `{2,6}`.
 
-* [a-z0-9_\.-]`+` This expression means that the content in the bracket expression must be present one or more time in order to match the email format.
+* [a-z0-9_\.-]`+` This expression address the username/name at the beginning of the email and its length must be one or more characters in order to match the email format.
 
-* [\da-z\.-]`+` This expression also means that the perceding item must match one ore more time.
+* [\da-z\.-]`+` This expression addresses the domain of the email and also means that the character length of the perceding item must match one ore more time.
 
-* [a-z\.]`{2,6}` This expression means that we want to find the perceding item a minimum of two times and a maximum of six times. (E.g. `.com` matches while `.comcom` does not match because the amount of characters = 7 )
+* [a-z\.]`{2,6}` This expression means that we want to find the perceding item a minimum of two times and a maximum of six times. (E.g. `.com` matches while `.comcom` does not match, because the amount of characters = 7 )
 
 ### Grouping Constructs
 
-To describe a grouping in a regex the characters are placed within parentheses and is used to restrict alternations.
+To describe a grouping of characters in a regex they are placed within parentheses `()` and is used to restrict alternations. We use the parentheses to enclose a pattern as it allows us to get a part of the match as a seperate item/subexpression. This is a very powerful tool because we can refer to the groups whenever we like as the regex engine captures them as a single unit. When a regex gets more complicated, by grouping parts of the regex in subexpressions we are able to check if different sections match different requirements.
+
+In our example the grouping of the characters allows us to apply seperate string rules to each such as the qunatifiers. The email regex contains three groupings which are `([a-z0-9_\.-]+)`,seperated by a `a`- character, `([\da-z\.-]+)`, seperated by a dot `.` and `([a-z\.]{2,6})`. By wrapping the bracket expressions in group constructs we can validate whether the subexpression matches the username, email domain name or the end of the email address. 
 
 
 
 
 
+`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`
 ### Character Classes
 
 Character Classes are used to tell the regex engine to match only one out of several characters and are indicated by characters wrapper in square brakets such as: [a-z0-9_\.-]. Usually a character class macthes only a sinle character and the order in the text is not relevant. 
