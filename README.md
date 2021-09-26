@@ -1,17 +1,19 @@
 # Regex - Matching an Email
 
-A "Regex" stands for regular expression and is a string of specific characters which allows us to search for specific patterns of text within string. This patterns are a universal powerful tool as they are used to validate text and/or search through text and can be used in more than one language such as Python and JavsScript.
+A "Regex" stands for regular expression and is a string of specific characters which allows us to search for specific patterns of text within string. This patterns are a universal and powerful tool as they are used to validate text and/or search through text and can be used in more than one language such as Python, JavsScript and C++.
 When you first look at a regular expression it can look extremely complicated, this is because there are endless possible combinations to describe a string and it takes practice to fully understand the syntax.
 
 a sequence of characters a search pattern for text
 
-This specific tutorial will explain the Regex of matching an email.
+This specific tutorial will explain the regular expression of "Matching an email"
 
 ## Summary
 
 A possible Regular Expression to describe whether a text or input matches the email format is:
 
-`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`
+```
+/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+```
 
 This specifc sequence of characters is used to validate if the email fulfills the email format requirements. Here is how the string breaks down: 
 
