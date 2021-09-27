@@ -113,11 +113,11 @@ To summarize the greedy qunatifier tries to match as much as they can only givin
 
 In the "Match an email" regex example we use two greedy qunatifier: The `+` and `{2,6}`.
 
-* [a-z0-9_\.-]`+` This expression addresses the username/name at the beginning of the email and its length must be one or more characters in order to match the email format.
+* `[a-z0-9_\.-]+` This expression addresses the username/name at the beginning of the email and its length must be one or more characters in order to match the email format.
 
-* [\da-z\.-]`+` This expression addresses the domain of the email and also means that the character length of the perceding item must match one ore more time.
+* `[\da-z\.-]+` This expression addresses the domain of the email and also means that the character length of the perceding item must match one ore more time.
 
-* [a-z\.]`{2,6}` This expression means that we want to find the perceding item a minimum of two times and a maximum of six times. (E.g. `.com` matches while `.comcom` does not match, because the amount of characters = 7 )
+* `[a-z\.]{2,6}` This expression means that we want to find the perceding item a minimum of two times and a maximum of six times. (E.g. `.com` matches while `.comcom` does not match, because the amount of characters = 7 )
 
 
 ### Grouping Constructs
