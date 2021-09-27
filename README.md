@@ -59,32 +59,6 @@ In regular expressions there are different types of characters. In order to unde
 
 * **Metacharacters**: Basic metacharacters have a special meaning and they can not be used as a single literal character alone. For example a `?` can not be used alone without getting an error or unexpected result. If you want to use a questionmark as an actual character you have to use `\?` instead of `?`, this can be called **escaping a metacharacter**. (See further details in the "Character Escapes" section)
 
-### Character Escapes
-
-As mentioned above there are some metacharacters which have a special meaning so they can not be used as an actual character by itself. For example the `?`-character is a quantifier, so if we only use it by itself, when we actally want to look for a questionmark in a string, it won't work. The solution for this problem is to use a backslash (`\`) before the special character. This concept is called "escaping a character". So basically by using the backslash before a metacharacter with a special meaning, this character loses its meaning and becomes an ordinary special character. 
-
-All the following characters have special meaning within a regular expression:
-
-```
-. ^ $ * + - ? ( ) [ ] { } \ | — /
-```
-
-To understand the "Matching an email" regex it is mendatory to understand this concept. As we can see, the dot (period) is one of the characters with a special meaning and purpose. It can be used as a "wildcard" because by default, the dot is a metacharacter which can match any single character(except a newline). It can be used as a letter, digit, whitespace or special character. 
-
-For example: `...\.` this could match many different strings such as: `cat.`, `891.`, `?=+.` because the dot (.) can be anything. 
-
-What if we want to specifically find a dot instead of any character? We  can use the "escaping" concept which means that the dot is not defined as any character anymore, in fact it is now "just" a dot (`.`).
-
-Example:
-
- * `alert("5.1".match(/\d\.\d/))` = MATCH, because `\d` is any digit and `\.` is a dot, so `\d\.\d` is the same as `5.1`
- * `alert("51".match(/\d\.\d/))` = NO MATCH, because the expression is looking for a real dot but the string does not contain one.
-
-
-
-In the "Match an email" example we use the "escaping concept four times:
-
-/^([a-z0-9_`\.`-]+)@([\da-z`\.`-]+)`\.`([a-z`\.`]{2,6})$/
 
 ### Anchors
 
@@ -179,6 +153,35 @@ In the "Match an email" Regex there are multiple character classes to ensure tha
 3. `\d` Matches any digit character
 4. `.` Matches any chracter except a newline character
 
+
+### Character Escapes
+
+As mentioned above there are some metacharacters which have a special meaning so they can not be used as an actual character by itself. For example the `?`-character is a quantifier, so if we only use it by itself, when we actally want to look for a questionmark in a string, it won't work. The solution for this problem is to use a backslash (`\`) before the special character. This concept is called "escaping a character". So basically by using the backslash before a metacharacter with a special meaning, this character loses its meaning and becomes an ordinary special character. 
+
+All the following characters have special meaning within a regular expression:
+
+```
+. ^ $ * + - ? ( ) [ ] { } \ | — /
+```
+
+To understand the "Matching an email" regex it is mendatory to understand this concept. As we can see, the dot (period) is one of the characters with a special meaning and purpose. It can be used as a "wildcard" because by default, the dot is a metacharacter which can match any single character(except a newline). It can be used as a letter, digit, whitespace or special character. 
+
+For example: `...\.` this could match many different strings such as: `cat.`, `891.`, `?=+.` because the dot (.) can be anything. 
+
+What if we want to specifically find a dot instead of any character? We  can use the "escaping" concept which means that the dot is not defined as any character anymore, in fact it is now "just" a dot (`.`).
+
+Example:
+
+ * `alert("5.1".match(/\d\.\d/))` = MATCH, because `\d` is any digit and `\.` is a dot, so `\d\.\d` is the same as `5.1`
+ * `alert("51".match(/\d\.\d/))` = NO MATCH, because the expression is looking for a real dot but the string does not contain one.
+
+
+
+In the "Match an email" example we use the "escaping concept four times:
+
+/^([a-z0-9_`\.`-]+)@([\da-z`\.`-]+)`\.`([a-z`\.`]{2,6})$/
+
+In all cases we escape the dot as a special character with a special meaning. This is because an email must contain dots between the for example domain and the end part in order to be a valid email address and if we would not escape the character the dot could be anything. This could lead to that the regex declares this `test@domain!com` as valid.
 
 
 ### The OR Operator
