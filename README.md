@@ -27,14 +27,15 @@ This specifc sequence of characters is used to validate if an email corresponds 
 
 ## Table of Contents
 
+- [Metacharacters and literal characters](#metacharacters-and-literal-characters)
 - [Anchors](#anchors)
+- [Bracket Expressions](#bracket-expressions)
 - [Quantifiers](#quantifiers)
 - [Grouping Constructs](#grouping-constructs)
-- [Bracket Expressions](#bracket-expressions)
 - [Character Classes](#character-classes)
+- [Character Escapes](#character-escapes)
 - [The OR Operator](#the-or-operator)
 - [Flags](#flags)
-- [Character Escapes](#character-escapes)
 
 ## Regex Components
 
@@ -130,12 +131,12 @@ In our example the grouping of the characters allows us to apply seperate string
  * `([\da-z\.-]+)` This subexpression will validate if the email domain name matches the pattern
  * `([a-z\.]{2,6})` This construct will validate the remaining domain name such as `.com`, `.net` or `.co`
 
-Because of the grouping construct we re able to apply different quantifier rules to different subexpressions.
+Because of the grouping construct we are able to apply different quantifier rules to different subexpressions.
  
 
 ### Character Classes
 
-Character classes are special notations which match any symbol from certain set. We already know the bracket expressions which are considered character classes. But there are also some other common character classes which can be indicated by a backslash `\` character. Certain letters can be escaped by representing common character classes, such as words, whitespaces or digits.Some examples of character classes are:
+Character classes are special notations which match any symbol from certain sets. We already know the bracket expressions which are considered character classes. But there are also some other common character classes which can be indicated by a backslash `\`. Certain letters can be escaped by representing common character classes, such as words, whitespaces or digits. Some examples of character classes are:
  
  * `.` - Matches any character excet a newline character
  * `\d` - this is a digit character class and matches any single digit(arabic) and is equivalent to the bracket expression `[0-9]`
@@ -151,7 +152,6 @@ In the "Match an email" Regex there are multiple character classes to ensure tha
 1. `[a-z]` Matches any lower case alphabetic character between a and z
 2. `[0-9]` Matches any number between 0 and 9
 3. `\d` Matches any digit character
-4. `.` Matches any chracter except a newline character
 
 
 ### Character Escapes
@@ -166,7 +166,7 @@ All the following characters have special meaning within a regular expression:
 
 To understand the "Matching an email" regex it is mendatory to understand this concept. As we can see, the dot (period) is one of the characters with a special meaning and purpose. It can be used as a "wildcard" because by default, the dot is a metacharacter which can match any single character(except a newline). It can be used as a letter, digit, whitespace or special character. 
 
-For example: `...\.` this could match many different strings such as: `cat.`, `891.`, `?=+.` because the dot (.) can be anything. 
+For example: `...\.` could match many different strings such as: `cat.`, `891.`, `?=+.` because the dot (.) can be anything. 
 
 What if we want to specifically find a dot instead of any character? We  can use the "escaping" concept which means that the dot is not defined as any character anymore, in fact it is now "just" a dot (`.`).
 
@@ -177,7 +177,7 @@ Example:
 
 
 
-In the "Match an email" example we use the "escaping concept four times:
+In the "Match an email" example we use the "escaping a character" concept four times:
 
 /^([a-z0-9_`\.`-]+)@([\da-z`\.`-]+)`\.`([a-z`\.`]{2,6})$/
 
