@@ -62,9 +62,9 @@ In regular expressions there are different types of characters. In order to unde
 
 ### Anchors
 
-In a regular expression line anchors do not match any characters in the text. In fact they are used to match the position before and after characters. To indicate the beginning of a regular expression we use `^`, so every character that follows is considered as being part of the pattern we are looking for. To determine the end of the expression we use `$`:
+In a regular expression by default line anchors do not match any characters in the text. In fact they are used to match the position before and after characters. To indicate the beginning of a regular expression we use `^`, so every character that follows is considered as being part of the pattern we are looking for. To determine the end of the expression we use `$`:
 
-/`^`([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})`$`/
+/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
 
 
 In general there are two possible options the string could start or end with:
