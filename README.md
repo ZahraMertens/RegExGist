@@ -165,26 +165,6 @@ In the "Match an email" Regex there are multiple character classes to ensure tha
 3. `\d` Matches any digit character
 4. `.` Matches any chracter except a newline character
 
-### The OR Operator
-
-The **OR operator** allows us to create a logical "or" operation. As we learned before, a bracket expression does not require a string to match all characters included in the pattern. Taking the example of `[a-z0-9]`, the text can include alphabetic **and** numeric characters but it is not mandatory. The text could also contain only alphabetic or numeric characters. To achieve a similar logic outside of the bracket expression, for example in a grouping construct, we could use the pipe character (`|`). The pipe character is used to match characters or expressions of either the left or the right of the | operator. For example `(t|T)` will either match `t` or `T`, it can't match both, and is equivalent to `[tT]`.
-
-### Flags
-
-Flags in regular expressions are located after the closing forward slash (e.g. `/....../g`) and define extra functionality or limits for the regex. There are 6 different flags in JavaScript:
-
-i
-With this flag the search is case-insensitive: no difference between A and a (see the example below).
-g
-With this flag the search looks for all matches, without it – only the first match is returned.
-m
-Multiline mode (covered in the chapter Multiline mode of anchors ^ $, flag "m").
-s
-Enables “dotall” mode, that allows a dot . to match newline character \n (covered in the chapter Character classes).
-u
-Enables full Unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter Unicode: flag "u" and class \p{...}.
-y
-“Sticky” mode: searching at the exact position in the text (covered in the chapter Sticky flag "y", searching at position)
 
 ### Character Escapes
 
@@ -195,6 +175,28 @@ All the following characters have special meaning within a regular expression:
 ```
 . ^ $ * + - ? ( ) [ ] { } \ | — /
 ```
+
+
+### The OR Operator
+
+The **OR operator** allows us to create a logical "or" operation. As we learned before, a bracket expression does not require a string to match all characters included in the pattern. Taking the example of `[a-z0-9]`, the text can include alphabetic **and** numeric characters but it is not mandatory. The text could also contain only alphabetic or numeric characters. To achieve a similar logic outside of the bracket expression, for example in a grouping construct, we could use the pipe character (`|`). The pipe character is used to match characters or expressions of either the left or the right of the | operator. For example `(t|T)` will either match `t` or `T`, it can't match both, and is equivalent to `[tT]`.
+
+**Note**: As there is no "OR operator" used in the "Match an email" regex, this is not relevant for this specific case.
+
+
+### Flags
+
+Flags in regular expressions are located after the closing forward slash (e.g. `/pattern/g`) and define extra functionality or limits for the regex. They are optional tokens which can be used to modify the searching behaviour of given patterns. Each flag is denoted by a single alphabetic character and serves different purposes in modifying the regex searching behaviour. There are six possible flags:
+
+* `i` - Stands for "ignore casing" and does the job of carrying out a case-insensitive search: There is no difference between `a` and `A`
+* `g` - With this flag the search looks for all matches ("global"), without it – only the first match is returned
+* `m` - Multiline mode: Makes the anchors match the beginning and ending of every single line instead of the beginning and ending of the whole string
+* `s` - Enables “dot all” mode, that allows a dot `.` to match newline character \n 
+* `u` - Enables full Unicode support: Makes the expression assume individual characters as code points, not code units, and thus match 32-bit characters as well.
+* `y` - “Sticky” mode: Searching at the exact position in the text (index) indicated in its lastIndex property
+
+**Note**: As there are no flags used in the "Match an email" regex, this is not relevant for this specific case.
+
 
 ## Author
 
