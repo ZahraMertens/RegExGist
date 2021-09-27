@@ -17,12 +17,12 @@ This specifc sequence of characters is used to validate if an email corresponds 
 
 * `/..../` Indicates a regular expression
 * `^` and `$` are anchors and initiate the beginning and end of the Regex
-* `a-z` Represents any alphabetic character from a to z
+* `a-z` Represents any lower case alphabetic character from a to z
 * `0-9` Represents any numeric character from 0 to 9
 * `_` Matches the literal character "_"
 * `-` Matches the literal character "-"
 * `@` Matches the special character "@"
-* `.` Outside of brackets it matches the literal character ".", inside it can be ay character 
+* `.` Outside of brackets it matches the literal character ".", inside it can be any character (except newline)
 
 
 ## Table of Contents
@@ -38,7 +38,9 @@ This specifc sequence of characters is used to validate if an email corresponds 
 
 ## Regex Components
 
-As **Regex** is a literal, so we can wrap the expression in forward slash (`/`) characters: `/`^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$`/`
+As **Regex** is considered a literal, we can wrap the expression in forward slash (`/`) characters: 
+
+`/`^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$`/`
 
 **Note**: In JavaScript there are two ways of describing a Regex: The literal notation and the use of a constructor notation where the constructors functions parameters are wrapped in quotation marks instead of forward slashes.
 
@@ -49,28 +51,40 @@ let re = new RegExp('\\w+')     //constructor with string pattern
 
 ![graph-regex](./assets/graph.png)
 
-### Metacharacters and literalcharacters
+### Metacharacters and literal characters
 
-In regular expressions there are different types of characters.
+In regular expressions there are different types of characters. In order to understand the "Match an email" regex the following should be outlined:
 
-* Literal character: In literal characters search a character matches a character. This is very simple so for example C matches C in Cars, or e matches e in pen.
-* Metacharacters: Basic metacharacters have a special meaning and they can not be used as a single literal character alone. For example a `?` can not be used alone without getting an error or unexpected result. If you want to use a questionmark as an actual character you have to use `\?` instead of `?`, this can be called **escaping a metacharacter**.
+* **Literal character**: In literal characters search a character matches a character. This is very simple concept, so for example `C` matches `C` in `Cars`, or `e` matches `e` in `pen`.
 
-### The Dot
+* **Metacharacters**: Basic metacharacters have a special meaning and they can not be used as a single literal character alone. For example a `?` can not be used alone without getting an error or unexpected result. If you want to use a questionmark as an actual character you have to use `\?` instead of `?`, this can be called **escaping a metacharacter**. (See further details in the "Character Escapes" section)
 
-To understand the "Matching an email" regex there are some things which are mendatory to understand. As mentioned above some characers have a special meaning. The dot is one of those as it can be used as a wildcard because by default, the dot is a metacharacter and can match any single character (except a newline), so it can be used as a letter, digit, whitespace or special character (except line breaks). So for example if we use "...\." this could match many different strings such as: "cat.", "891.", "?=+." because the dot (.) can be anything. 
+### Character Escapes
 
-What what if we want to specificly find a dot insetad of any character? We then use a syntax called "escaping a character" which is basically using a backslash before the special character: `\.`. This syntax means that the dot is not defined as any character anymore, in fact it is now "just" a dot (`.`).
+As mentioned above there are some metacharacters which have a special meaning so they can not be used as an actual character by itself. For example the `?`-character is a quantifier, so if we only use it by itself, when we actally want to look for a questionmark in a string, it won't work. The solution for this problem is to use a backslash (`\`) before the special character. This concept is called "escaping a character". So basically by using the backslash before a metacharacter with a special meaning, this character loses its meaning and becomes an ordinary special character. 
+
+All the following characters have special meaning within a regular expression:
+
+```
+. ^ $ * + - ? ( ) [ ] { } \ | — /
+```
+
+To understand the "Matching an email" regex it is mendatory to understand this concept. As we can see, the dot (period) is one of the characters with a special meaning and purpose. It can be used as a "wildcard" because by default, the dot is a metacharacter which can match any single character(except a newline). It can be used as a letter, digit, whitespace or special character. 
+
+For example: `...\.` this could match many different strings such as: `cat.`, `891.`, `?=+.` because the dot (.) can be anything. 
+
+What if we want to specifically find a dot instead of any character? We  can use the "escaping" concept which means that the dot is not defined as any character anymore, in fact it is now "just" a dot (`.`).
 
 Example:
 
  * `alert("5.1".match(/\d\.\d/))` = MATCH, because `\d` is any digit and `\.` is a dot, so `\d\.\d` is the same as `5.1`
  * `alert("51".match(/\d\.\d/))` = NO MATCH, because the expression is looking for a real dot but the string does not contain one.
 
-**Note**: To "escape" other characters the backslash is also used for [ \ ^ $ . | ? * + ( ). The syntax is the same as the dot. So: to use the $-sign we must use `\$.`.
 
-As we now know the basics of regex characters we can continue with the components of a regex.
 
+In the "Match an email" example we use the "escaping concept four times:
+
+/^([a-z0-9_`\.`-]+)@([\da-z`\.`-]+)`\.`([a-z`\.`]{2,6})$/
 
 ### Anchors
 
@@ -165,16 +179,6 @@ In the "Match an email" Regex there are multiple character classes to ensure tha
 3. `\d` Matches any digit character
 4. `.` Matches any chracter except a newline character
 
-
-### Character Escapes
-
-As mentioned above there are some characters which need to be escaped in order to actually be a character. As for example the `?`-character is a quantifier, so if we only use it by itself, when we actally want to look for a questionmark in a string, it won't work. So when using a backslash `\`in a regex, it escapes the character. So when using the backslash on any of the special character with a specific functionality it loses its purpose and becomes a ordinary special character.
-
-All the following characters have special meaning within a regular expression:
-
-```
-. ^ $ * + - ? ( ) [ ] { } \ | — /
-```
 
 
 ### The OR Operator
